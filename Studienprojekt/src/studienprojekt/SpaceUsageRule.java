@@ -6,6 +6,8 @@
 
 package studienprojekt;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  *
  * @author Sebastian
@@ -21,9 +23,9 @@ public class SpaceUsageRule {
     }
     
     public static SpaceUsageRule parseSpaceUsageRule(String string) {
-        String[] splitted = string.split("(.*)=\"(.*)\"");
-        
-        return new SpaceUsageRule(splitted[0], splitted[1]);
+        String[] splitted = string.split("=");
+
+        return new SpaceUsageRule(splitted[0], StringUtils.strip(splitted[1], "\""));
     }
 
     /**
