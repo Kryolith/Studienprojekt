@@ -29,6 +29,13 @@ public class OSMCoordinate
 		this.latitude = latitude;
 	}
         
+        public double distanceTo(OSMCoordinate coordinate) {
+            double a2 = Math.pow(coordinate.getLatitude() - this.latitude, 2f);
+            double b2 = Math.pow(coordinate.getLongitude() - this.longitude, 2f);
+            return Math.sqrt(a2 + b2);
+        }
+        
+        
         @Override
         public String toString() {
             return "( " + this.latitude + " | " + this.longitude + " )";
