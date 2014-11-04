@@ -37,7 +37,7 @@ public class Mapper {
     }
     
     public void run() {
-        // Initialisiere InfileHandler mit Dateipfad des Testdatensatz
+        // Initialisiere InfileHandler mit Dateipfad des Testdatensatz aaabbbb6
         InfileHandler ifh = new InfileHandler("Testdatensatz/Data.txt");
         
         // Initialisiere OutfileHandler mit Dateipfad des Ausgabeordners
