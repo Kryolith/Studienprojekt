@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class OSMWay extends OSMElement 
 {
-	private List<OSMNode> wayComponents = new ArrayList<OSMNode>();
+	private List<OSMNode> wayComponents = new ArrayList();
 	private HashMap tags;
 	
 	public OSMWay(String id)
@@ -37,8 +37,11 @@ public class OSMWay extends OSMElement
 	
         public boolean containsNode(OSMNode node) {
             for(OSMNode tnode : wayComponents) {
-                if(tnode == node) return true;
+                if(tnode.getId().equalsIgnoreCase(node.getId())) {
+                    return true;
+                }
             }
+            
             return false;
         }
         

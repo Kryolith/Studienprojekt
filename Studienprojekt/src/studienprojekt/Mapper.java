@@ -61,14 +61,14 @@ public class Mapper {
         OSMParser osmParser = new OSMParser();
         
         // Lege OSMCoordinate aus den Daten der Textfile an
-    	OSMCoordinate surCoordinate = new OSMCoordinate(Double.parseDouble(line.get(1)), Double.parseDouble(line.get(2)));
+    	OSMCoordinate surCoordinate = new OSMCoordinate(Double.parseDouble(line.get(2)), Double.parseDouble(line.get(1)));
         
         System.out.println(surCoordinate);
         
     	OSMMap areaToCheck = null;
         
         try {
-            areaToCheck = osmParser.getOSMMap(surCoordinate, 0.1);
+            areaToCheck = osmParser.getOSMMap(surCoordinate, 0.001);
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             System.out.println(ex);
         }
