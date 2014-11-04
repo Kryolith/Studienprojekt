@@ -20,6 +20,8 @@ public class DefaultRule extends Rule {
     
     private final int level = 1;
     
+    public DefaultRule() { }
+    
     // Gilt für jede Regel und gibt daher immer `true` zurück
     @Override
     public boolean handles(SpaceUsageRule sur) {
