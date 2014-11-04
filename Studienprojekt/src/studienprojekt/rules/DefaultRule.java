@@ -6,10 +6,12 @@
 
 package studienprojekt.rules;
 
+import java.util.ArrayList;
 import java.util.List;
 import studienprojekt.SpaceUsageRule;
 import studienprojekt.osm.OSMCoordinate;
 import studienprojekt.osm.OSMMap;
+import studienprojekt.osm.OSMNode;
 import studienprojekt.osm.OSMWay;
 
 /**
@@ -30,8 +32,36 @@ public class DefaultRule extends Rule {
 
     // Finde den nächstbesten Weg und gebe diesen zurück
     @Override
-    public List<OSMWay> execute(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur) {
-        throw new UnsupportedOperationException("Execute ist noch nicht implementiert");
+    public List<OSMWay> handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur) {
+        // Initialisiere Ergebnisvariable
+        List<OSMWay> result = new ArrayList();
+        
+        // Initialisiere Suchergebnisse
+        OSMNode nearestNode = null;
+        double nearestDistance = Double.MAX_VALUE;
+        
+        // Suche Punkt, der am nächsten an den Koordinaten liegt
+        for(OSMNode node : map.getNodes()) {
+            double distance = node.getNodeCoordinate().distanceTo(coordinate);
+            if(distance < nearestDistance) {
+                nearestDistance = distance;
+                nearestNode = node;
+            }
+        }
+        
+        // Falls kein Punkt gefunden wurde, dann abbruch
+        if(nearestNode == null) return result;
+        
+        // Ansonsten schauen ob Punkt in nem Weg liegt und der Ergebnisvariable hinzufügen
+        for(OSMWay way : map.getWays()) {
+            if(way.containsNode(nearestNode)) {
+                result.add(way);
+                break;
+            }
+        }
+        
+        // Ergebnis zurückgeben
+        return result;
     }
 
     // Regel ist eine Standardregel (1)
