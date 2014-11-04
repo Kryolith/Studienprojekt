@@ -28,6 +28,11 @@ public class OSMCoordinate
 	{
 		this.latitude = latitude;
 	}
+        
+        @Override
+        public String toString() {
+            return "( " + this.latitude + " | " + this.longitude + " )";
+        }
 	
 	
 }
