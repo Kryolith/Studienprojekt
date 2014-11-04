@@ -35,6 +35,13 @@ public class OSMWay extends OSMElement
 		this.tags = tags;
 	}
 	
+        public boolean containsNode(OSMNode node) {
+            for(OSMNode tnode : wayComponents) {
+                if(tnode == node) return true;
+            }
+            return false;
+        }
+        
 	@Override
 	public String toString()
 	{
