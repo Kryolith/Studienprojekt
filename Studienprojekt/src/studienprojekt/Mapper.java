@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 import studienprojekt.osm.OSMCoordinate;
 import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMParser;
+import studienprojekt.rules.DefaultRule;
 
 /**
  *
@@ -20,13 +21,19 @@ import studienprojekt.osm.OSMParser;
 public class Mapper {    
     
     Configuration config;
+    RuleManager ruleManager;
     
     public Mapper() {
         this.config = new Configuration();
+        this.ruleManager = new RuleManager();
     }
     
     public void initialize() {
+        // Lade Configuration
         loadConfiguration();
+        
+        // Adde zum testen ein paar rules ( eine )
+        this.ruleManager.registerRule(new DefaultRule());
     }
     
     public void loadConfiguration() {
@@ -68,6 +75,10 @@ public class Mapper {
 
         System.out.println("TESTAUSGABE: auslesen des Inhalts des generierten OSMMap-Objekts:");
         System.out.print(areaToCheck);
+        
+        this.ruleManager.handle(areaToCheck, surCoordinate, SpaceUsageRule.parseSpaceUsageRule(line.get(3)));
+        
+        
         /* Martins Teil Ende */
     }
 }
