@@ -23,7 +23,7 @@ public abstract class Rule {
     
     // Bekommt den API-Handler, die aktuelle Koordinate und die aktuelle SpaceUsageRule übergeben
     // Rückgabe: Liste mit gefundenen Wegen
-    public abstract List<OSMWay> execute(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur);
+    public abstract List<OSMWay> handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur);
     
     // Gibt das Tiefenlevel dieser Regel zurück
     // 1: Standardregel
