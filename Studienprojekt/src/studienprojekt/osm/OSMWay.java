@@ -56,7 +56,8 @@ public class OSMWay extends OSMElement
 ;		
 		for (OSMNode wayComp : wayComponents)
 		{
-			String id = wayComp.getId();
+			String id = wayComp.getId() 
+                                + " " + wayComp.getNodeCoordinate();
 			wayNodeIds += "ref = " + id + "\n";
 		}
 		
