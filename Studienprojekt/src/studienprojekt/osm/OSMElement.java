@@ -1,6 +1,5 @@
 package studienprojekt.osm;
 
-
 public class OSMElement {
 	
 	private String id;

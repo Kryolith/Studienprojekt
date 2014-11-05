@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package studienprojekt;
 
 import java.io.IOException;
@@ -14,10 +9,6 @@ import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMParser;
 import studienprojekt.rules.DefaultRule;
 
-/**
- *
- * @author Sebastian
- */
 public class Mapper {    
     
     Configuration config;
@@ -73,8 +64,8 @@ public class Mapper {
             System.out.println(ex);
         }
 
-        System.out.println("TESTAUSGABE: auslesen des Inhalts des generierten OSMMap-Objekts:");
-        System.out.print(areaToCheck);
+        //System.out.println("TESTAUSGABE: auslesen des Inhalts des generierten OSMMap-Objekts:");
+        //System.out.print(areaToCheck);
         
         this.ruleManager.handle(areaToCheck, surCoordinate, SpaceUsageRule.parseSpaceUsageRule(line.get(3)));
         

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package studienprojekt.rules;
 
 import java.util.List;
@@ -12,10 +6,6 @@ import studienprojekt.osm.OSMCoordinate;
 import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMWay;
 
-/**
- *
- * @author Sebastian
- */
 public abstract class Rule {
     
     // Bekommt die aktuelle SpaceUsageRule übergeben und gibt zurück, ob diese behandelt werden kann

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package studienprojekt;
 
 import java.util.ArrayList;
@@ -13,10 +7,6 @@ import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMWay;
 import studienprojekt.rules.Rule;
 
-/**
- *
- * @author Sebastian
- */
 public class RuleManager {
     
     private List<Rule> rules;
