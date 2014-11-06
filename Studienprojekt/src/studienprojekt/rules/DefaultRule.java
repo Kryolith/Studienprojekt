@@ -42,7 +42,7 @@ public class DefaultRule extends Rule {
         // Falls kein Punkt gefunden wurde, dann abbruch
         if(nearestNode == null) return result;
         
-        System.out.println("\n\nNearest Node: " + nearestNode);
+        //System.out.println("\n\nNearest Node: " + nearestNode);
         
         // Ansonsten schauen ob Punkt in nem Weg liegt und der Ergebnisvariable hinzufügen
         for(OSMWay way : map.getWays()) {
@@ -52,7 +52,7 @@ public class DefaultRule extends Rule {
             }
         }
         
-        if(result.size() == 0) System.out.println("Kein zugehörigen Weg gefunden");
+        if(result.isEmpty()) System.out.println("Kein zugehörigen Weg gefunden");
         
         // Ergebnis zurückgeben
         return result;
