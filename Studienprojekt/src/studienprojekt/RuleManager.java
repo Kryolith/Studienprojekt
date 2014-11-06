@@ -19,17 +19,14 @@ public class RuleManager {
         this.rules.add(rule);
     }
     
-    public void handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur) {
+    public List<OSMWay> handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur) {
         
         for(Rule rule : rules) {
             if(rule.handles(sur)) {
-                List<OSMWay> result = rule.handle(map, coordinate, sur);
-                if(result.size() > 0)
-                    System.out.println(result.get(0));
-                else
-                    System.out.println("Keine Ergebnisse");
+                return rule.handle(map, coordinate, sur);
             }
         }
+        return null;
     }
     
 }
