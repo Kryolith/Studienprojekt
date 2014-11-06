@@ -10,5 +10,7 @@ public class Main {
         
         // Run the main algorithm
         mapper.run();
+        
+        //test
     } 
 }
