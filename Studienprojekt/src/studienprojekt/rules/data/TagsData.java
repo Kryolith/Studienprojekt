@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import studienprojekt.rules.data.PropertiesData;
 /**
  *
  * @author Sebastian
  */
 public class TagsData extends Data {
-    
+
     //private Node node;
     protected List<PropertiesData> tags;
     
@@ -34,7 +34,7 @@ public class TagsData extends Data {
         System.out.println(this);
     }
     
-    public List<PropertiesData> getTags(String key) {
+    public List<PropertiesData> getTags() {
         return this.tags;
     }
     
@@ -42,11 +42,13 @@ public class TagsData extends Data {
     public final String toString() {
         String result = this.name + ":\n";
         for(PropertiesData tag : this.tags) {
-            if(!this.name.equals("#text") && !this.name.equals("#comment:"))
+            //if(!this.name.equals("#text") && !this.name.equals("#comment:"))
                 result += tag + "-------------------\n";
         }
         
         return result;
     }
+    
+
     
 }
