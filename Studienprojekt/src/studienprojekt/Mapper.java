@@ -7,7 +7,7 @@ import org.xml.sax.SAXException;
 import studienprojekt.osm.OSMCoordinate;
 import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMParser;
-import studienprojekt.rules.DefaultRule;
+import studienprojekt.deprecated.DefaultRule;
 
 public class Mapper {    
     
@@ -24,7 +24,7 @@ public class Mapper {
         loadConfiguration();
         
         // Adde zum testen ein paar rules ( eine )
-        this.ruleManager.registerRule(new DefaultRule());
+        // this.ruleManager.registerRule(new DefaultRule());
     }
     
     public void loadConfiguration() {

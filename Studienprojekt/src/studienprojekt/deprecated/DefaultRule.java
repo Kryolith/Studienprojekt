@@ -1,4 +1,4 @@
-package studienprojekt.rules;
+package studienprojekt.deprecated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,20 +8,20 @@ import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMNode;
 import studienprojekt.osm.OSMWay;
 
-public class DefaultRule extends Rule { 
+public class DefaultRule {// extends Rule { 
     
     private final int level = 1;
     
     public DefaultRule() { }
     
     // Gilt für jede Regel und gibt daher immer `true` zurück
-    @Override
+   // @Override
     public boolean handles(SpaceUsageRule sur) {
         return  true;
     }
 
     // Finde den nächstbesten Weg und gebe diesen zurück
-    @Override
+    //@Override
     public List<OSMWay> handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur) {
         // Initialisiere Ergebnisvariable
         List<OSMWay> result = new ArrayList();
@@ -59,7 +59,7 @@ public class DefaultRule extends Rule {
     }
 
     // Regel ist eine Standardregel (1)
-    @Override
+    //@Override
     public int getLevel() {
         return this.level;
     }

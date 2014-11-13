@@ -1,23 +1,39 @@
 package studienprojekt.rules;
 
+import studienprojekt.rules.data.Data;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import studienprojekt.SpaceUsageRule;
 import studienprojekt.osm.OSMCoordinate;
 import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMWay;
 
-public abstract class Rule {
+
+public class Rule {
     
-    // Bekommt die aktuelle SpaceUsageRule übergeben und gibt zurück, ob diese behandelt werden kann
-    public abstract boolean handles(SpaceUsageRule sur);
+    private Map<String, Data> data;
     
-    // Bekommt den API-Handler, die aktuelle Koordinate und die aktuelle SpaceUsageRule übergeben
-    // Rückgabe: Liste mit gefundenen Wegen
-    public abstract List<OSMWay> handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur);
+    public Rule() {
+        this.data = new HashMap();
+    }
     
-    // Gibt das Tiefenlevel dieser Regel zurück
-    // 1: Standardregel
-    // 2: Allgemeine Regel
-    // 3: Spezielle Regel
-    public abstract int getLevel();
+    public void addInformation(Data data) {
+        this.data.put(data.getName(), data);
+    }
+    
+    public List<OSMWay> handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur) {
+        // Initialisiere Ergebnisvariable
+        List<OSMWay> result = new ArrayList();
+        
+        
+        
+        
+        return result;
+    }
+    
+    
+    
+    
 }
