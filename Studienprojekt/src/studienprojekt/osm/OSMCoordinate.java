@@ -41,9 +41,9 @@ public class OSMCoordinate
             
             double a = Math.pow(Math.sin(delta_lat / 2), 2)
                     + Math.cos(rad_lat_1) * Math.cos(rad_lat_2) 
-                    * Math.pow(Math.sin(delta_lon), 2);
+                    * Math.pow(Math.sin(delta_lon / 2), 2);
             
-            double c = Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             
             return r * c;
         }
