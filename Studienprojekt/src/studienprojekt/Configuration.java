@@ -1,46 +1,66 @@
 package studienprojekt;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
-public class Configuration {
+public final class Configuration {
     
-    Properties properties;
-    
-    public Configuration(String filepath) {
-        properties = new Properties();
-        load(filepath);
-    }
+    private Map<String, String> properties;
+    private String configPath;
     
     public Configuration() {
-        properties = new Properties();
+        
+        this.properties = new HashMap();
+        this.configPath = "";        
     }
     
-    
-    public void load(String filepath) {
-        BufferedInputStream stream;
-        try {
-            stream = new BufferedInputStream(new FileInputStream(filepath));
-            properties.load(stream);
-            stream.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Mapper.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Mapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public boolean has(String key) {
+        return this.properties.containsKey(key);
     }
     
-    public Object get(Object key) {
+    public String get(String key) {
         return this.properties.get(key);
     }
     
-    public Object get(Object key, Object defaultObject) {
-        return this.properties.getOrDefault(key, defaultObject);
+    public String get(String key, String defaultValue) {
+        return has(key) ? get(key) : defaultValue;
     }
     
+    public void load(String filepath) {
+        Document doc;
+        
+        this.configPath = filepath;
+        
+        File f = new File(this.configPath);
+        
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            doc = builder.build(f);
+            
+            Element root = doc.getRootElement(); 
+            
+            List<Element> new_properties = root.getChild("properties").getChildren("property");
+            
+            for(Element property : new_properties) {
+                String key = property.getChildText("key");
+                String value = property.getChildText("value");
+                
+                this.properties.put(key, value);
+            }
+
+        } catch(JDOMException | IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void load() {
+        load("config/default.xml");
+    }
 }
