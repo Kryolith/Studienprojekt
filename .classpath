@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Studienprojekt/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/fluent-hc-4.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/httpclient-4.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/httpclient-cache-4.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/httpmime-4.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/jaxen-1.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/jdom-2.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/jdom-2.0.5-contrib.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/jdom-2.0.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/jdom-2.0.5-junit.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/jdom-2.0.5-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dawid/Dropbox/workspace2/Studienprojekt/Studienprojekt/lib/xml-apis.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
