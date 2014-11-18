@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package studienprojekt;
 
 import java.io.IOException;
@@ -12,21 +7,25 @@ import org.xml.sax.SAXException;
 import studienprojekt.osm.OSMCoordinate;
 import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMParser;
+import studienprojekt.rules.DefaultRule;
+import studienprojekt.rules.SmokingRule;
 
-/**
- *
- * @author Sebastian
- */
 public class Mapper {    
     
     Configuration config;
+    RuleManager ruleManager;
     
     public Mapper() {
         this.config = new Configuration();
+        this.ruleManager = new RuleManager();
     }
     
     public void initialize() {
+        // Lade Configuration
         loadConfiguration();
+        
+        // Adde zum testen ein paar rules ( eine )
+        this.ruleManager.registerRule(new SmokingRule());
     }
     
     public void loadConfiguration() {
@@ -37,37 +36,70 @@ public class Mapper {
     }
     
     public void run() {
-        // Initialisiere InfileHandler mit Dateipfad des Testdatensatz
+        // Initialisiere InfileHandler mit Dateipfad des Testdatensatz aaa
         InfileHandler ifh = new InfileHandler("Testdatensatz/Data.txt");
         
-        // Initialisiere OutfileHandler mit Dateipfad des Ausgabeordners
-        //OutfileHandler ofh = new OutfileHandler("Ausgabe0001/");
+        //Initialisiere OutfileHandler mit Dateipfad des Ausgabeordners
+        OutfileHandler ofh = new OutfileHandler("result/");
         
         // Lade erste Zeile um die Anzahl der Datensätze zu ermitteln
         int datacount = Integer.parseInt(ifh.getNextLineArray().get(0));
         
-        // Rufe nächste Zeile vom Infilehandler ab
-        List<String> line = ifh.getNextLineArray();
+        // Limitiere datacount für Testzwecke
+        datacount = datacount > 115 ? 115 : datacount;
         
-    	/* Ab hier Martins Teil */
-        // OSMParser erzeugen
+        // OSMParser-Objekt erzeugen, damit mit der Map-API kommuniziert werden kann
         OSMParser osmParser = new OSMParser();
         
-        // Lege OSMCoordinate aus den Daten der Textfile an
-    	OSMCoordinate surCoordinate = new OSMCoordinate(Double.parseDouble(line.get(1)), Double.parseDouble(line.get(2)));
-        
-        System.out.println(surCoordinate);
-        
-    	OSMMap areaToCheck = null;
-        
-        try {
-            areaToCheck = osmParser.getOSMMap(surCoordinate, 0.1);
-        } catch (ParserConfigurationException | SAXException | IOException ex) {
-            System.out.println(ex);
-        }
-
-        System.out.println("TESTAUSGABE: auslesen des Inhalts des generierten OSMMap-Objekts:");
-        System.out.print(areaToCheck);
-        /* Martins Teil Ende */
+        // Iteriere durch alle Zeilen der Eingabedatei und behandel die eingetragenen SURs
+        for(int i = 0; i < datacount; i++) {
+            
+            System.out.println("Nr." +i+":");
+            
+            // Erstelle und initialisiere ein Result-Objekt für das Ergebnis dieser Zeile
+            Result result = new Result();
+            
+            // Lade nächste Zeile aus dem Infilehandler als String-Array
+            List<String> line = ifh.getNextLineArray();
+            
+            // Setze name im Ergebnisobjekt (Name Feld 0 der Zeile)
+            result.setName(line.get(0));
+            
+            // Erstelle ein OSMCoordinate-Objekt mit den Koordinaten aus der Zeile
+            OSMCoordinate surCoordinate = new OSMCoordinate(Double.parseDouble(line.get(2)), Double.parseDouble(line.get(1)));
+            
+            // Setze Koordinaten im Ergebnisobjekt
+            result.setOSMCoordinate(surCoordinate);
+            
+            // Parse die SpaceUsageRule aus Feld 3 der Zeile
+            SpaceUsageRule currentSur = SpaceUsageRule.parseSpaceUsageRule(line.get(3));
+            
+ ///////////////////////// ZUM TESTEN: Nur die Smoking-Regel wird betrachtet /////////////////////////////////// 
+            if (!((currentSur.getRule()).equals("smoking")))
+                continue;
+///////////////////////// ENDE TESTSEQUENZ //////////////////////////////////////////////////////////////////////
+            
+            // AUch zum Ergebnis-Objekt hinzufügen
+            result.setSpaceUsageRule(currentSur);
+            
+            // Erstelle OSMMap-Objekt, dass die Gegend um die Koordinaten beschreibt
+            OSMMap areaToCheck = null;
+                        
+            // Füllen der Map mit Daten
+            try {
+                areaToCheck = osmParser.getOSMMap(surCoordinate, 0.001);
+            } catch (ParserConfigurationException | SAXException | IOException ex) {
+                System.out.println(ex);
+            }
+            
+            // Falls erfolgreich weiter (ansonsten sollte eh ein Fehler ausgegeben worden sein, evtl ist die Bedingung hier überflüssig?!?)
+            if(areaToCheck != null) {
+                // Gib die aktuellen Daten an den RegelManager weiter und speicher die Rückgabe im result-Objekt
+                result.setOSMWays(this.ruleManager.handle(areaToCheck, surCoordinate, currentSur));
+                
+                // Schlussendlich wird das Ergebnis noch abgespeichert über den OutfileHandler
+                ofh.saveData(result);
+            }
+        }        
     }
 }

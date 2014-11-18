@@ -40,7 +40,7 @@ public class OSMApiHandler
 	    try {
 		    	response = client.execute(request);
 		    	br = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
-		    	osmMapFile = new File (mapfileName + ".osm");
+		    	osmMapFile = new File ("temp/" + mapfileName + ".osm");
 	        	FileWriter writer = new FileWriter (osmMapFile , false);        	
 	            while ((line = br.readLine()) != null) {
 	                writer.write(line);

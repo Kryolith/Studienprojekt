@@ -1,10 +1,13 @@
 package studienprojekt.osm;
 
-
 public class OSMElement {
 	
 	private String id;
 	
+        public OSMElement()
+	{
+
+	}
 	public OSMElement(String id)
 	{
 		this.id = id;

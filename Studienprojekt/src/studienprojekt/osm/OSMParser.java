@@ -97,9 +97,9 @@ public class OSMParser {
         					   tagNode = tagList.item(j);
         					   key = tagNode.getAttributes().getNamedItem("k").getTextContent();
         					   value = tagNode.getAttributes().getNamedItem("v").getTextContent();
-        					   //System.out.println(key + " = " + value);
+        					   // System.out.println(key + " = " + value);
         					   tagMap.put(key, value);
-        					   //System.out.println(key + " = " + tagMap.get(key));
+        					   // System.out.println(key + " = " + tagMap.get(key));
         				   }
         			   }
         			   
@@ -154,7 +154,25 @@ public class OSMParser {
         				   if((childrenList.item(j).getNodeName()).equals("nd"))
         				   {
         					   ndNode = childrenList.item(j);
-        					   osmWay.getWayComponents().add(new OSMNode(ndNode.getAttributes().getNamedItem("ref").getTextContent()));
+                                                   
+                                                   // S: Füge existierenden Node dem Way zu, keinen neuen
+                                                   String nodeRef = ndNode.getAttributes().getNamedItem("ref").getTextContent();
+                                                   
+                                                   boolean nodeFound = false;
+                                                   
+                                                   for(OSMNode n : nodes) {
+                                                       if(n.getId().equals(nodeRef)) {
+                                                           osmWay.getWayComponents().add(n);
+                                                           nodeFound = true;
+                                                           break;
+                                                       }
+                                                   }
+                                                   
+                                                   if(!nodeFound) {
+                                                       System.out.println("Wegnodereferenz zeigt auf keinen gültigen Node");
+                                                       osmWay.getWayComponents().add(new OSMNode(nodeRef));
+                                                   }
+                                                   
         					   //System.out.println("nd = " + ndNode.getAttributes().getNamedItem("ref"));
         				   }
         			   }
