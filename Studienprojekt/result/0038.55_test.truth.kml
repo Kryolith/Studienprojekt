@@ -11,8 +11,8 @@
 </PolyStyle>
 </Style>
 <Placemark>
-<name>0001</name>
-<description><img src='0001.jpg' width = '400' /></description>
+<name>0038</name>
+<description><img src='0038.jpg' width = '400' /></description>
 <styleUrl>#Poly1</styleUrl>
 <Polygon>
 <altitudeMode>clampToGround</altitudeMode>
@@ -21,12 +21,12 @@
 <outerBoundaryIs>
 <LinearRing>
 <coordinates>
-5.33901,50.9304
-5.3389736,50.9304004
-5.33901,50.9304
-5.3389236,50.9303548
-5.33901,50.9304
-5.3390484,50.9303693
+5.33534,50.9281
+5.3354582,50.928182
+5.33534,50.9281
+5.335536,50.9281524
+5.33534,50.9281
+5.3355486,50.928275
 </coordinates>
 </LinearRing>
 </outerBoundaryIs>

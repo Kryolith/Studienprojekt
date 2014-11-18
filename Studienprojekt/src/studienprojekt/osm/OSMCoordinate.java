@@ -30,9 +30,22 @@ public class OSMCoordinate
 	}
         
         public double distanceTo(OSMCoordinate coordinate) {
-            double a2 = Math.pow(coordinate.getLatitude() - this.latitude, 2f);
-            double b2 = Math.pow(coordinate.getLongitude() - this.longitude, 2f);
-            return Math.sqrt(a2 + b2);
+            
+            int r = 6371;
+            
+            double rad_lat_1 = Math.toRadians(this.latitude);
+            double rad_lat_2 = Math.toRadians(coordinate.getLatitude());
+            
+            double delta_lat = Math.toRadians(this.latitude - coordinate.getLatitude());
+            double delta_lon = Math.toRadians(this.longitude - coordinate.getLongitude());
+            
+            double a = Math.pow(Math.sin(delta_lat / 2), 2)
+                    + Math.cos(rad_lat_1) * Math.cos(rad_lat_2) 
+                    * Math.pow(Math.sin(delta_lon), 2);
+            
+            double c = Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            
+            return r * c;
         }
         
         // Exakte Distanzmessung in km, die auch die unterschiedlichen Längengradabstände 

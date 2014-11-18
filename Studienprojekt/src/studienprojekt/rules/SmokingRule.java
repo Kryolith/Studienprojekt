@@ -575,12 +575,16 @@ INNER:      for (OSMWay way : polygonsToScan)
         testWayComponents.add(surNode);
         System.out.println("surCoor: "+ surNode.getNodeCoordinate().getLatitude() + " , " + surNode.getNodeCoordinate().getLongitude());
         
-     //   testWayComponents.add(nearestNode);
+        testWayComponents.add(nearestNode);
         System.out.println("nearestNodeCoor: "+ nearestNode.getNodeCoordinate().getLatitude() + " , " + nearestNode.getNodeCoordinate().getLongitude());
+        
+        testWayComponents.add(surNode);
         
         testWayComponents.add(leftNeighbourNode);
         System.out.println("leftNeighbCoor: "+ leftNeighbourNode.getNodeCoordinate().getLatitude() + " , " + leftNeighbourNode.getNodeCoordinate().getLongitude());
 
+        testWayComponents.add(surNode);
+        
         testWayComponents.add(rightNeighbourNode);
         System.out.println("rightNeighbCoor: "+ rightNeighbourNode.getNodeCoordinate().getLatitude() + " , " + rightNeighbourNode.getNodeCoordinate().getLongitude());
      //   testWayComponents.add(leftNeighbourNode);
