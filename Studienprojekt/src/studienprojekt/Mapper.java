@@ -2,12 +2,13 @@ package studienprojekt;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import studienprojekt.osm.OSMCoordinate;
 import studienprojekt.osm.OSMMap;
 import studienprojekt.osm.OSMParser;
-import studienprojekt.rules.DefaultRule;
 
 public class Mapper {    
     
@@ -24,7 +25,7 @@ public class Mapper {
         loadConfiguration();
         
         // Adde zum testen ein paar rules ( eine )
-        this.ruleManager.registerRule(new DefaultRule());
+        // this.ruleManager.registerRule(new DefaultRule());
     }
     
     public void loadConfiguration() {
@@ -86,8 +87,12 @@ public class Mapper {
             
             // Falls erfolgreich weiter (ansonsten sollte eh ein Fehler ausgegeben worden sein, evtl ist die Bedingung hier überflüssig?!?)
             if(areaToCheck != null) {
-                // Gib die aktuellen Daten an den RegelManager weiter und speicher die Rückgabe im result-Objekt
-                result.setOSMWays(this.ruleManager.handle(areaToCheck, surCoordinate, currentSur));
+                try {
+                    // Gib die aktuellen Daten an den RegelManager weiter und speicher die Rückgabe im result-Objekt
+                    result.setOSMWays(this.ruleManager.handle(areaToCheck, surCoordinate, currentSur));
+                } catch (Exception ex) {
+                    Logger.getLogger(Mapper.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 // Schlussendlich wird das Ergebnis noch abgespeichert über den OutfileHandler
                 ofh.saveData(result);
