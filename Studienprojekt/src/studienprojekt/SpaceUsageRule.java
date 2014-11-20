@@ -44,6 +44,5 @@ public class SpaceUsageRule {
      */
     public void setValue(String value) {
         this.value = value;
-    }
-    
+    }   
 }

@@ -21,26 +21,24 @@ public class Mapper {
     }
     
     public void initialize() {
-        // Lade Configuration
-        loadConfiguration();
-        
-        // Adde zum testen ein paar rules ( eine )
-        // this.ruleManager.registerRule(new DefaultRule());
-    }
-    
-    public void loadConfiguration() {
-        // if file exists lastest.properties
-        // load latest.properties
-        // else
-        // generate default configuration
+        config.load();
     }
     
     public void run() {
-        // Initialisiere InfileHandler mit Dateipfad des Testdatensatz aaa
-        InfileHandler ifh = new InfileHandler("Testdatensatz/Data.txt");
         
         //Initialisiere OutfileHandler mit Dateipfad des Ausgabeordners
-        OutfileHandler ofh = new OutfileHandler("result/");
+        try {
+            if(!config.has("path:inputfile"))
+                throw new Exception("Input filepath wasn't specified in the configuration");
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        
+        // Initialisiere InfileHandler mit Dateipfad des Testdatensatz aaa
+        InfileHandler ifh = new InfileHandler(config.get("path:inputfile"));
+
+        OutfileHandler ofh = new OutfileHandler(config.get("path:results", "results/"));
         
         // Lade erste Zeile um die Anzahl der Datensätze zu ermitteln
         int datacount = Integer.parseInt(ifh.getNextLineArray().get(0));
