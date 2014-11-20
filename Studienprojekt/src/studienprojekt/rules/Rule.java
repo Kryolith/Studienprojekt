@@ -1,39 +1,44 @@
 package studienprojekt.rules;
 
-import studienprojekt.rules.data.Data;
+import studienprojekt.rules.data.Tag;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import studienprojekt.SpaceUsageRule;
-import studienprojekt.osm.OSMCoordinate;
-import studienprojekt.osm.OSMMap;
-import studienprojekt.osm.OSMWay;
 
 
-public class Rule {
+public class Rule 
+{
     
-    private Map<String, Data> data;
+    private Map<String, String> properties;
+    private ArrayList<Tag> tagList = new ArrayList<Tag>();
     
-    public Rule() {
-        this.data = new HashMap();
+	public Rule()
+	{
+	}
+	
+	public void addProperty(String key, String value)
+	{
+		properties.put(key, value);
+	}
+    
+    public String getValueOfProperty(String key)
+    {
+    	return properties.get(key); 
     }
     
-    public void addInformation(Data data) {
-        this.data.put(data.getName(), data);
+    public void addTag(Tag tag)
+    {
+    	tagList.add(tag);
     }
     
-    public List<OSMWay> handle(OSMMap map, OSMCoordinate coordinate, SpaceUsageRule sur) {
-        // Initialisiere Ergebnisvariable
-        List<OSMWay> result = new ArrayList();
-        
-        
-        
-        
-        return result;
+    public Tag getTag(int i)
+	{
+		return tagList.get(i);
+	}
+    
+    public int sizeTagList()
+    {
+    	return tagList.size();
     }
-    
-    
-    
     
 }
